@@ -36,52 +36,113 @@
 
     private TokenData Model = new TokenData();
 
+
     protected async Task HandleValidSubmit()
     {
 
 
         try
         {
-            Http.DefaultRequestHeaders.Authorization =
-           new AuthenticationHeaderValue("Bearer", "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImFQY3R3X29kdlJPb0VOZzNWb09sSWgydGlFcyIsImtpZCI6ImFQY3R3X29kdlJPb0VOZzNWb09sSWgydGlFcyJ9.eyJhdWQiOiJhcGk6Ly8wYmFkNThjMi0yYmUzLTQ4MzAtYjY5MC02MmQzMTkyOGU1ZGMiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC81NWQ5NmY1ZS0yYjc1LTQ3NjItYWUwOC0xMWRlNTg0ZDhlODMvIiwiaWF0IjoxNTcxMTUxODYyLCJuYmYiOjE1NzExNTE4NjIsImV4cCI6MTU3MTE1NTc2MiwiYWlvIjoiNDJWZ1lGQTdXeEw4VEh6VnBlSko2MXRMTGo1ZkNBQT0iLCJhcHBpZCI6ImE1NjA3NTgxLTU4M2YtNDc3MC1hZTMyLWVmODdmNWI3MmEwYSIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzU1ZDk2ZjVlLTJiNzUtNDc2Mi1hZTA4LTExZGU1ODRkOGU4My8iLCJvaWQiOiIyNjBjZGU1OC1hODJlLTQ4MWItYmI4Ny00MDM0OWY1NDAxYjciLCJzdWIiOiIyNjBjZGU1OC1hODJlLTQ4MWItYmI4Ny00MDM0OWY1NDAxYjciLCJ0aWQiOiI1NWQ5NmY1ZS0yYjc1LTQ3NjItYWUwOC0xMWRlNTg0ZDhlODMiLCJ1dGkiOiI3enBuUV9HVTFrYUloaThETDNmUkFBIiwidmVyIjoiMS4wIn0.H16wVakYbNjhkw1JTuTtQucATEcJfrpYJZ5jDRcHbkWltfOVmTwbwOcw65XAzhVm-SXjoPTjhWbaeC5fbBPrF2o1B36alD54Yf6hUDds3zvswipWZM6t2umBAOVHg42PA59JFWY7QTsQit612KV13PINn5uQCkr12H-zMw0m3ZiMwbiGtuOHvYbTfPy19qPuQFnCYbHPmMIIidLZexJUnp-FBYYzI6dwojbSbIPVSHfa34SlTug7ZOZwNeraos5b7YwTAv6DQAC3s85rJXZ7hcbVIK2NKrIvsukq115xn7u3udFReDp-kPgPGUjpP85BnFfv6HmVLrfN3BsWiki88w");
+            // Http.DefaultRequestHeaders.Authorization =
+            //new AuthenticationHeaderValue("Bearer", "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImFQY3R3X29kdlJPb0VOZzNWb09sSWgydGlFcyIsImtpZCI6ImFQY3R3X29kdlJPb0VOZzNWb09sSWgydGlFcyJ9.eyJhdWQiOiJhcGk6Ly8wYmFkNThjMi0yYmUzLTQ4MzAtYjY5MC02MmQzMTkyOGU1ZGMiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC81NWQ5NmY1ZS0yYjc1LTQ3NjItYWUwOC0xMWRlNTg0ZDhlODMvIiwiaWF0IjoxNTcxMTUxODYyLCJuYmYiOjE1NzExNTE4NjIsImV4cCI6MTU3MTE1NTc2MiwiYWlvIjoiNDJWZ1lGQTdXeEw4VEh6VnBlSko2MXRMTGo1ZkNBQT0iLCJhcHBpZCI6ImE1NjA3NTgxLTU4M2YtNDc3MC1hZTMyLWVmODdmNWI3MmEwYSIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzU1ZDk2ZjVlLTJiNzUtNDc2Mi1hZTA4LTExZGU1ODRkOGU4My8iLCJvaWQiOiIyNjBjZGU1OC1hODJlLTQ4MWItYmI4Ny00MDM0OWY1NDAxYjciLCJzdWIiOiIyNjBjZGU1OC1hODJlLTQ4MWItYmI4Ny00MDM0OWY1NDAxYjciLCJ0aWQiOiI1NWQ5NmY1ZS0yYjc1LTQ3NjItYWUwOC0xMWRlNTg0ZDhlODMiLCJ1dGkiOiI3enBuUV9HVTFrYUloaThETDNmUkFBIiwidmVyIjoiMS4wIn0.H16wVakYbNjhkw1JTuTtQucATEcJfrpYJZ5jDRcHbkWltfOVmTwbwOcw65XAzhVm-SXjoPTjhWbaeC5fbBPrF2o1B36alD54Yf6hUDds3zvswipWZM6t2umBAOVHg42PA59JFWY7QTsQit612KV13PINn5uQCkr12H-zMw0m3ZiMwbiGtuOHvYbTfPy19qPuQFnCYbHPmMIIidLZexJUnp-FBYYzI6dwojbSbIPVSHfa34SlTug7ZOZwNeraos5b7YwTAv6DQAC3s85rJXZ7hcbVIK2NKrIvsukq115xn7u3udFReDp-kPgPGUjpP85BnFfv6HmVLrfN3BsWiki88w");
 
+            /*
+            // other way to post 
             var requestMessage = new HttpRequestMessage()
             {
                 Method = new HttpMethod("POST"),
-                RequestUri = new Uri("https://avidx-ci-tokenservice01-int-api.cde-ase-devavidxcloud.com/api/tokens"),
+                RequestUri = new Uri("http://localhost:62150/v1/organization/NewBuyer"),
                 Content =
-                    new StringContent("test")
+                    new StringContent(@"{""data"":""12234"",""tokenScheme"":""1""}")
             };
 
             requestMessage.Content.Headers.ContentType =
                 new System.Net.Http.Headers.MediaTypeHeaderValue(
                     "application/json");
 
-            requestMessage.Content.Headers.TryAddWithoutValidation(
-                "X-Correlation-ID", "82e93f47-c6e4-468f-9c27-ad2939473636");
-
-            //requestMessage.Properties[WebAssemblyHttpMessageHandler.FetchArgs] = new
-            //{
-            //    credentials = FetchCredentialsOption.Include
-            //};
-
             var response = await Http.SendAsync(requestMessage);
             var responseStatusCode = response.StatusCode;
             var responseBody = await response.Content.ReadAsStringAsync();
+
+            //////requestMessage.Content.Headers.TryAddWithoutValidation(
+            //////    "X-Correlation-ID", "82e93f47-c6e4-468f-9c27-ad2939473636");
+
+            //////requestMessage.Properties[WebAssemblyHttpMessageHandler.FetchArgs] = new
+            //////{
+            //////    credentials = FetchCredentialsOption.Include
+            //////};
+            
+            StatusClass = "alert-success";
+            StatusMessage = responseBody ;
+            */
+
+            /*
+            // simple Get to Cors URL
+            var addItem = new TokenData { data = "123", tokenScheme = "1" };
+            await Http.PostJsonAsync("http://localhost:62150/v1/organization/NewBuyer", addItem);    // works for [EnableCors("*", "*", "*")]
+            */
+
+            /*
+            // simple Get to Cors URL
+            var result = await Http.GetStringAsync("http://localhost:62150/v1/organization?organizationId=1&sourceSystemCode=2"); // works for [EnableCors("*", "*", "*")]
+            */
+
+            
+
+            
         }
         catch (Exception ex)
-        { 
-        
+        {
+
             StatusClass = "alert-danger";
             StatusMessage = ex.Message;
         }
 
 
-
-
-
-
     }
+
+    //protected async Task HandleValidSubmit()
+    //{
+
+
+    //    try
+    //    {
+    //        Http.DefaultRequestHeaders.Authorization =
+    //       new AuthenticationHeaderValue("Bearer", "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImFQY3R3X29kdlJPb0VOZzNWb09sSWgydGlFcyIsImtpZCI6ImFQY3R3X29kdlJPb0VOZzNWb09sSWgydGlFcyJ9.eyJhdWQiOiJhcGk6Ly8wYmFkNThjMi0yYmUzLTQ4MzAtYjY5MC02MmQzMTkyOGU1ZGMiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC81NWQ5NmY1ZS0yYjc1LTQ3NjItYWUwOC0xMWRlNTg0ZDhlODMvIiwiaWF0IjoxNTcxMTUxODYyLCJuYmYiOjE1NzExNTE4NjIsImV4cCI6MTU3MTE1NTc2MiwiYWlvIjoiNDJWZ1lGQTdXeEw4VEh6VnBlSko2MXRMTGo1ZkNBQT0iLCJhcHBpZCI6ImE1NjA3NTgxLTU4M2YtNDc3MC1hZTMyLWVmODdmNWI3MmEwYSIsImFwcGlkYWNyIjoiMSIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzU1ZDk2ZjVlLTJiNzUtNDc2Mi1hZTA4LTExZGU1ODRkOGU4My8iLCJvaWQiOiIyNjBjZGU1OC1hODJlLTQ4MWItYmI4Ny00MDM0OWY1NDAxYjciLCJzdWIiOiIyNjBjZGU1OC1hODJlLTQ4MWItYmI4Ny00MDM0OWY1NDAxYjciLCJ0aWQiOiI1NWQ5NmY1ZS0yYjc1LTQ3NjItYWUwOC0xMWRlNTg0ZDhlODMiLCJ1dGkiOiI3enBuUV9HVTFrYUloaThETDNmUkFBIiwidmVyIjoiMS4wIn0.H16wVakYbNjhkw1JTuTtQucATEcJfrpYJZ5jDRcHbkWltfOVmTwbwOcw65XAzhVm-SXjoPTjhWbaeC5fbBPrF2o1B36alD54Yf6hUDds3zvswipWZM6t2umBAOVHg42PA59JFWY7QTsQit612KV13PINn5uQCkr12H-zMw0m3ZiMwbiGtuOHvYbTfPy19qPuQFnCYbHPmMIIidLZexJUnp-FBYYzI6dwojbSbIPVSHfa34SlTug7ZOZwNeraos5b7YwTAv6DQAC3s85rJXZ7hcbVIK2NKrIvsukq115xn7u3udFReDp-kPgPGUjpP85BnFfv6HmVLrfN3BsWiki88w");
+
+    //        var requestMessage = new HttpRequestMessage()
+    //        {
+    //            Method = new HttpMethod("POST"),
+    //            RequestUri = new Uri("https://avidx-ci-tokenservice01-int-api.cde-ase-devavidxcloud.com/api/tokens"),
+    //            Content =
+    //                new StringContent("test")
+    //        };
+
+    //        requestMessage.Content.Headers.ContentType =
+    //            new System.Net.Http.Headers.MediaTypeHeaderValue(
+    //                "application/json");
+
+    //        requestMessage.Content.Headers.TryAddWithoutValidation(
+    //            "X-Correlation-ID", "82e93f47-c6e4-468f-9c27-ad2939473636");
+
+    //        //requestMessage.Properties[WebAssemblyHttpMessageHandler.FetchArgs] = new
+    //        //{
+    //        //    credentials = FetchCredentialsOption.Include
+    //        //};
+
+    //        var response = await Http.SendAsync(requestMessage);
+    //        var responseStatusCode = response.StatusCode;
+    //        var responseBody = await response.Content.ReadAsStringAsync();
+    //    }
+    //    catch (Exception ex)
+    //    { 
+
+    //        StatusClass = "alert-danger";
+    //        StatusMessage = ex.Message;
+    //    }
+
+
+    //}
 
     /*
         private async Task AddItem()
